@@ -1,0 +1,8 @@
+with cte as (select id, student,
+case 
+    when id mod 2=0 then  id-1
+    when id mod 2=1  and id != (select max(id) from seat ) then id+1
+    else id
+end as orderseat
+ from  Seat
+ order by orderseat ) select orderseat as id, student from cte
